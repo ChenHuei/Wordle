@@ -14,9 +14,11 @@ function App() {
   }, []);
 
   return (
-    <div className="App">
-      <h1>Wordle (Lingo)</h1>
-      {solution && <Wordle />}
+    <div className="flex flex-col justify-center items-center">
+      <h1 className="py-5 mb-[30px] text-xl border-b border-slate-400">
+        Wordle
+      </h1>
+      {solution && <Wordle solution={solution} />}
     </div>
   );
 }

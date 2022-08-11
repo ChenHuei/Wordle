@@ -1,23 +1,83 @@
 import { useState } from "react";
 
-const useWordle = () => {
+type FormattedGuess = {
+  key: string;
+  color: "grey" | "yellow" | "green";
+};
+
+const useWordle = (solution: string) => {
   const [turn, setTurn] = useState(0);
   const [currentGuess, setCurrentGuess] = useState<string>("");
-  const [guesses, setGuesses] = useState([]); // each guess is an array
-  const [history, setHistory] = useState([]); // each guess is a string
+  const [guesses, setGuesses] = useState<FormattedGuess[][]>([...Array(6)]);
+  const [history, setHistory] = useState<string[]>([]);
   const [isCorrect, setIsCorrect] = useState(false);
 
-  // format a guess into an array of letter objects
-  // e.g. [{key: 'a', color: 'yellow'}]
-  const formatGuess = () => {};
-
-  // add a new guess to the guesses state
-  // update the isCorrect state if the guess is correct
-  // add one to the turn state
-  const addNewGuess = () => {};
+  const formatGuess = (): FormattedGuess[] => {
+    const solutions = solution.split("");
+    return currentGuess
+      .split("")
+      .map(
+        (item) =>
+          ({
+            key: item,
+            color: "grey",
+          } as FormattedGuess)
+      )
+      .map((item, index) => {
+        if (solutions[index] === item.key) {
+          // side effect
+          solutions[index] = "";
+          return {
+            ...item,
+            color: "green",
+          } as FormattedGuess;
+        }
+        return item;
+      })
+      .map((item) => {
+        if (solutions.includes(item.key) && item.color !== "green") {
+          // side effect
+          solutions[solutions.indexOf(item.key)] = "";
+          return {
+            ...item,
+            color: "yellow",
+          } as FormattedGuess;
+        }
+        return item;
+      });
+  };
 
   const handleKeyup = (event: KeyboardEvent) => {
     const { key } = event;
+
+    if (key === "Enter") {
+      if (turn > 5) {
+        console.log("you used all your guesses!!");
+        return;
+      }
+
+      if (history.includes(currentGuess)) {
+        console.log("you already tried that word!!");
+        return;
+      }
+
+      if (currentGuess.length !== 5) {
+        console.log("word must be 5 chars!!");
+        return;
+      }
+
+      setHistory([...history, currentGuess]);
+      setTurn(turn + 1);
+      setGuesses((prev) => {
+        prev[turn] = formatGuess();
+        return prev;
+      });
+
+      if (currentGuess === solution) {
+        setIsCorrect(true);
+      }
+      setCurrentGuess("");
+    }
 
     if (key === "Backspace") {
       setCurrentGuess((prev) => prev.slice(0, -1));
