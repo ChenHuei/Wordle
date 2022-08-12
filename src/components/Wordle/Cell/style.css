@@ -1,0 +1,58 @@
+.cell:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.cell:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+.cell:nth-child(4) {
+  animation-delay: 0.6s;
+}
+
+.cell:nth-child(5) {
+  animation-delay: 0.8s;
+}
+
+.cell--grey {
+  --background: #a1a1a1;
+  --border-color: #a1a1a1;
+  animation: flip 0.6s ease forwards;
+}
+
+.cell--yellow {
+  --background: #e2cc68;
+  --border-color: #e2cc68;
+  animation: flip 0.6s ease forwards;
+}
+
+.cell--green {
+  --background: #5ac85a;
+  --border-color: #5ac85a;
+  animation: flip 0.6s ease forwards;
+}
+
+@keyframes flip {
+  0% {
+    transform: rotateX(0);
+    background: #fff;
+    border-color: #333;
+  }
+  45% {
+    transform: rotateX(90deg);
+    background: #fff;
+    border-color: #333;
+  }
+  55% {
+    transform: rotateX(90deg);
+    background: var(--background);
+    border-color: var(--border-color);
+    color: #eee;
+  }
+  100% {
+    transform: rotateX(0deg);
+    background: var(--background);
+    border-color: var(--border-color);
+    color: #eee;
+  }
+}

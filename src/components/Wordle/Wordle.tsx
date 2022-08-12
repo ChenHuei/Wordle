@@ -20,8 +20,8 @@ const Wordle = (props: WordleProps) => {
   }, [handleKeyup]);
 
   useEffect(() => {
-    console.log(guesses, turn, isCorrect);
-  }, [guesses, turn, isCorrect]);
+    console.log(guesses, turn, isCorrect, currentGuess);
+  }, [guesses, turn, isCorrect, currentGuess]);
 
   return (
     <>
@@ -32,14 +32,24 @@ const Wordle = (props: WordleProps) => {
           <div key={index} className="flex justify-center items-center">
             {guess ? (
               <>
-                {guess.map((item, i) => (
-                  <Cell key={i} color={item.color}>
+                {guess.map((item) => (
+                  <Cell key={item.key} color={item.color}>
                     {item.key}
                   </Cell>
                 ))}
               </>
+            ) : turn === index ? (
+              <>
+                {[...currentGuess.split(""), ...Array(5)]
+                  .slice(0, 5)
+                  .map((item) => (
+                    <Cell key={item} isCurrent>
+                      {item}
+                    </Cell>
+                  ))}
+              </>
             ) : (
-              [...Array(5)].fill(0).map((_, i) => <Cell key={i} />)
+              [...Array(5)].map((_, i) => <Cell key={i} />)
             )}
           </div>
         ))}
