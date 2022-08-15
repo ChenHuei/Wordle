@@ -1,14 +1,16 @@
 import { useEffect } from "react";
 import useWordle from "../../hooks/useWordle";
 import Cell from "./Cell";
+import Keypad from "./Keypad";
 
 interface WordleProps {
   solution: string;
+  letters: { key: string }[];
 }
 
 const Wordle = (props: WordleProps) => {
-  const { solution } = props;
-  const { currentGuess, guesses, turn, isCorrect, handleKeyup } =
+  const { solution, letters } = props;
+  const { currentGuess, guesses, turn, isCorrect, usedKeys, handleKeyup } =
     useWordle(solution);
 
   useEffect(() => {
@@ -18,10 +20,6 @@ const Wordle = (props: WordleProps) => {
       window.removeEventListener("keyup", handleKeyup);
     };
   }, [handleKeyup]);
-
-  useEffect(() => {
-    console.log(guesses, turn, isCorrect, currentGuess);
-  }, [guesses, turn, isCorrect, currentGuess]);
 
   return (
     <>
@@ -54,6 +52,7 @@ const Wordle = (props: WordleProps) => {
           </div>
         ))}
       </div>
+      <Keypad letters={letters} usedKeys={usedKeys} />
     </>
   );
 };

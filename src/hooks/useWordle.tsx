@@ -8,8 +8,11 @@ type FormattedGuess = {
 const useWordle = (solution: string) => {
   const [turn, setTurn] = useState(0);
   const [currentGuess, setCurrentGuess] = useState<string>("");
-  const [guesses, setGuesses] = useState<FormattedGuess[][]>([...Array(6)]);
+  const [guesses, setGuesses] = useState<(FormattedGuess[] | undefined)[]>([
+    ...Array(6),
+  ]);
   const [history, setHistory] = useState<string[]>([]);
+  const [usedKeys, setUsedKeys] = useState<Record<string, string>>({});
   const [isCorrect, setIsCorrect] = useState(false);
 
   const formatGuess = (): FormattedGuess[] => {
@@ -65,12 +68,32 @@ const useWordle = (solution: string) => {
         console.log("word must be 5 chars!!");
         return;
       }
-
+      const formattedGuess = formatGuess();
       setHistory([...history, currentGuess]);
       setTurn(turn + 1);
       setGuesses((prev) => {
-        prev[turn] = formatGuess();
+        prev[turn] = formattedGuess;
         return prev;
+      });
+      setUsedKeys((prevUsedKeys) => {
+        return formattedGuess.reduce((acc, item) => {
+          if (item.color === "green") {
+            acc[item.key] = "green";
+            return acc;
+          }
+          if (item.color === "yellow" && acc[item.key] !== "green") {
+            acc[item.key] = "yellow";
+            return acc;
+          }
+          if (
+            item.color === "grey" &&
+            acc[item.key] !== ("green" || "yellow")
+          ) {
+            acc[item.key] = "grey";
+            return acc;
+          }
+          return acc;
+        }, prevUsedKeys);
       });
 
       if (currentGuess === solution) {
@@ -91,7 +114,8 @@ const useWordle = (solution: string) => {
     }
   };
 
-  return { turn, currentGuess, guesses, isCorrect, handleKeyup };
+  return { turn, currentGuess, guesses, usedKeys, isCorrect, handleKeyup };
 };
 
 export default useWordle;
+export type { FormattedGuess };

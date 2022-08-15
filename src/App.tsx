@@ -1,10 +1,9 @@
 import { useState, useEffect } from "react";
 import Wordle from "./components/Wordle";
-import Keypad, { Letter } from "./components/Keypad";
 
 function App() {
   const [solution, setSolution] = useState<null | string>(null);
-  const [letters, setLetters] = useState<Letter[]>([]);
+  const [letters, setLetters] = useState<{ key: string }[]>([]);
 
   useEffect(() => {
     Promise.all([
@@ -25,8 +24,7 @@ function App() {
       <h1 className="py-5 mb-[30px] text-xl border-b border-slate-400">
         Wordle
       </h1>
-      {solution && <Wordle solution={solution} />}
-      <Keypad letters={letters} />
+      {solution && <Wordle solution={solution} letters={letters} />}
     </div>
   );
 }
