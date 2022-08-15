@@ -1,7 +1,8 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import useWordle from "../../hooks/useWordle";
 import Cell from "./Cell";
 import Keypad from "./Keypad";
+import Modal from "./Modal";
 
 interface WordleProps {
   solution: string;
@@ -12,17 +13,26 @@ const Wordle = (props: WordleProps) => {
   const { solution, letters } = props;
   const { currentGuess, guesses, turn, isCorrect, usedKeys, handleKeyup } =
     useWordle(solution);
+  const [isShowModal, setIsShowModal] = useState(false);
 
   useEffect(() => {
     window.addEventListener("keyup", handleKeyup);
 
+    if (isCorrect || turn > 5) {
+      setTimeout(() => setIsShowModal(true), 2000);
+      window.removeEventListener("keyup", handleKeyup);
+    }
+
     return () => {
       window.removeEventListener("keyup", handleKeyup);
     };
-  }, [handleKeyup]);
+  }, [handleKeyup, isCorrect, turn]);
 
   return (
     <>
+      {isShowModal && (
+        <Modal isCorrect={isCorrect} turn={turn} solution={solution} />
+      )}
       <div>solution - {solution}</div>
       <div>current guess - {currentGuess}</div>
       <div>

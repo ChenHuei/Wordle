@@ -8,7 +8,7 @@ interface KeypadProps {
 const Keypad = (props: KeypadProps) => {
   const { letters, usedKeys } = props;
   return (
-    <div className="flex flex-wrap justify-center max-w-[500px] mx-5">
+    <div className="flex flex-wrap justify-center max-w-[500px] my-5">
       {letters.map((item) => (
         <div
           key={item.key}
