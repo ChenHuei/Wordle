@@ -1,16 +1,23 @@
 import { useState, useEffect } from "react";
 import Wordle from "./components/Wordle";
+import Keypad, { Letter } from "./components/Keypad";
 
 function App() {
   const [solution, setSolution] = useState<null | string>(null);
+  const [letters, setLetters] = useState<Letter[]>([]);
 
   useEffect(() => {
-    fetch("http://localhost:3001/solutions")
-      .then((res) => res.json())
-      .then((res) => {
-        const randomSolution = res[Math.floor(Math.random() * res.length)];
-        setSolution(randomSolution.word);
-      });
+    Promise.all([
+      fetch("http://localhost:3001/solutions")
+        .then((res) => res.json())
+        .then((res) => {
+          const randomSolution = res[Math.floor(Math.random() * res.length)];
+          setSolution(randomSolution.word);
+        }),
+      fetch("http://localhost:3001/letters")
+        .then((res) => res.json())
+        .then(setLetters),
+    ]);
   }, []);
 
   return (
@@ -19,6 +26,7 @@ function App() {
         Wordle
       </h1>
       {solution && <Wordle solution={solution} />}
+      <Keypad letters={letters} />
     </div>
   );
 }
