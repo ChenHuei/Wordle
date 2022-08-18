@@ -42,7 +42,8 @@ concurrency:
 #         uses: actions/deploy-pages@v1
 jobs:
   lhci:
-    name: Lighthouse CI
+    environment:
+      name: Lighthouse CI
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
