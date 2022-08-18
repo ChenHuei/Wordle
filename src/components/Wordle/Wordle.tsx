@@ -1,12 +1,14 @@
 import { useEffect, useState } from "react";
-import useWordle from "../../hooks/useWordle";
+// components
 import Cell from "./Cell";
-import Keypad from "./Keypad";
+import Keypad, { Letter } from "./Keypad";
 import Modal from "./Modal";
+// hooks
+import useWordle from "../../hooks/useWordle";
 
 interface WordleProps {
   solution: string;
-  letters: { key: string }[];
+  letters: Letter[];
 }
 
 const Wordle = (props: WordleProps) => {

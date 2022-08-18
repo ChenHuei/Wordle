@@ -1,22 +1,14 @@
 import { useState, useEffect } from "react";
+// components
 import Wordle from "./components/Wordle";
+// constants
+import { SOLUTIONS, LETTERS } from "./constants";
 
 function App() {
-  const [solution, setSolution] = useState<null | string>(null);
-  const [letters, setLetters] = useState<{ key: string }[]>([]);
+  const [solution, setSolution] = useState<string>("");
 
   useEffect(() => {
-    Promise.all([
-      fetch("http://localhost:3001/solutions")
-        .then((res) => res.json())
-        .then((res) => {
-          const randomSolution = res[Math.floor(Math.random() * res.length)];
-          setSolution(randomSolution.word);
-        }),
-      fetch("http://localhost:3001/letters")
-        .then((res) => res.json())
-        .then(setLetters),
-    ]);
+    setSolution(SOLUTIONS[Math.floor(Math.random() * SOLUTIONS.length)].word);
   }, []);
 
   return (
@@ -24,7 +16,7 @@ function App() {
       <h1 className="py-5 mb-[30px] text-xl border-b border-slate-400">
         Wordle
       </h1>
-      {solution && <Wordle solution={solution} letters={letters} />}
+      {solution !== "" && <Wordle solution={solution} letters={LETTERS} />}
     </div>
   );
 }

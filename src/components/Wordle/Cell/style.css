@@ -35,23 +35,23 @@
 @keyframes flip {
   0% {
     transform: rotateX(0);
-    background: #fff;
+    background-color: #fff;
     border-color: #333;
   }
   45% {
     transform: rotateX(90deg);
-    background: #fff;
+    background-color: #fff;
     border-color: #333;
   }
   55% {
     transform: rotateX(90deg);
-    background: var(--background);
+    background-color: var(--background);
     border-color: var(--border-color);
     color: #eee;
   }
   100% {
     transform: rotateX(0deg);
-    background: var(--background);
+    background-color: var(--background);
     border-color: var(--border-color);
     color: #eee;
   }
