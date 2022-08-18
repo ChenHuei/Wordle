@@ -8,7 +8,7 @@ import useWordle from "../../hooks/useWordle";
 
 interface WordleProps {
   solution: string;
-  letters: Letter[];
+  letters: Letter[][];
 }
 
 const Wordle = (props: WordleProps) => {
@@ -35,8 +35,6 @@ const Wordle = (props: WordleProps) => {
       {isShowModal && (
         <Modal isCorrect={isCorrect} turn={turn} solution={solution} />
       )}
-      <div>solution - {solution}</div>
-      <div>current guess - {currentGuess}</div>
       <div>
         {guesses.map((guess, index) => (
           <div key={index} className="flex justify-center items-center">
