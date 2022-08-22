@@ -9,20 +9,15 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - name: Install Node.js
-        uses: actions/setup-node@v1
+      - name: Audit URLs using Lighthouse
+        uses: treosh/lighthouse-ci-action@v9
         with:
-          node-version: 14.x
-      - name: npm install, build
-        run: |
-          npm ci
-          npm run build
-      - name: run lighthouse-ci
-        run: |
-          npm install -g @lhci/cli@0.8.x
-          lhci autorun --upload.target=temporary-public-storage || echo "LHCI failed!"
-        env:
-          LHCI_GITHUB_APP_TOKEN: ${{secrets.LHCI_GITHUB_APP_TOKEN}}
+          urls: https://chenhuei.github.io/Wordle
+          serverBaseUrl: "./"
+          budgetPath: ./budget.json
+          configPath: ./lighthouserc.json
+          uploadArtifacts: true
+          temporaryPublicStorage: true
   build:
     environment:
       name: Build
