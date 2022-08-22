@@ -1,9 +1,10 @@
 {
   "ci": {
     "collect": {
-      "settings": {
-        "plugins": ["lighthouse-plugin-field-performance"]
-      }
+      "staticDistDir": "./build"
+    },
+    "upload": {
+      "target": "temporary-public-storage"
     }
   }
 }
