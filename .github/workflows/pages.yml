@@ -36,7 +36,7 @@ jobs:
       - name: Audit URLs using Lighthouse
         uses: treosh/lighthouse-ci-action@v9
         with:
-          urls: https://chenhuei.github.io/Wordle
+          urls: https://chenhuei.github.io/
           configPath: ".lighthouserc.json"
           uploadArtifacts: true
           temporaryPublicStorage: true
