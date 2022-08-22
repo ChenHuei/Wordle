@@ -12,8 +12,6 @@
     "@types/react": "^18.0.15",
     "@types/react-dom": "^18.0.6",
     "gh-pages": "^4.0.0",
-    "lighthouse": "^9.6.6",
-    "lighthouse-plugin-field-performance": "^3.0.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-scripts": "5.0.1",
