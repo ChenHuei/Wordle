@@ -13,8 +13,10 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: 14
-      - name: npm install
-        run: npm install
+      - name: npm install, build
+        run: |
+          npm install
+          npm run build
       - name: run lighthouse-ci
         run: |
           npm install -g @lhci/cli@0.8.x
