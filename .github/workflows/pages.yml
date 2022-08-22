@@ -28,11 +28,6 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
     steps:
-      - name: download artifact
-        uses: actions/download-artifact@v2
-        with:
-          name: production-files
-          path: ./build
       - name: Audit URLs using Lighthouse
         uses: treosh/lighthouse-ci-action@v9
         with:
