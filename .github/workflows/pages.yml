@@ -33,7 +33,7 @@ jobs:
         uses: treosh/lighthouse-ci-action@v9
         with:
           urls: https://chenhuei.github.io/Wordle
-          budgetPath: ./budget.json
+          configPath: ".lighthouserc.json"
           uploadArtifacts: true
           temporaryPublicStorage: true
   deploy:
