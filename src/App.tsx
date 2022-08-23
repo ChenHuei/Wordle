@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import packageInfo from "../package.json";
 // components
 import Wordle from "./components/Wordle";
 // constants
@@ -9,6 +10,7 @@ function App() {
 
   useEffect(() => {
     setSolution(SOLUTIONS[Math.floor(Math.random() * SOLUTIONS.length)].word);
+    console.log(packageInfo.version);
   }, []);
 
   return (

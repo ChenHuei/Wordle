@@ -15,7 +15,7 @@ jobs:
           node-version: 14
       - name: npm install, build
         run: |
-          npm install
+          npm ci
           npm run build
       - name: run lighthouse-ci
         run: |
@@ -30,15 +30,6 @@ jobs:
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/main'
     steps:
-      - uses: actions/checkout@v2
-      - name: Install Node.js
-        uses: actions/setup-node@v1
-        with:
-          node-version: 13.x
-      - name: npm install
-        run: |
-          npm ci
-          npm run build
       - name: upload production-ready build files
         uses: actions/upload-artifact@v2
         with:
