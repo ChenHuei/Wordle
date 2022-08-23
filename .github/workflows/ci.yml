@@ -30,6 +30,15 @@ jobs:
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/main'
     steps:
+      - uses: actions/checkout@v2
+      - name: Install Node.js
+        uses: actions/setup-node@v1
+        with:
+          node-version: 13.x
+      - name: npm install, build
+        run: |
+          npm ci
+          npm run build
       - name: upload production-ready build files
         uses: actions/upload-artifact@v2
         with:
