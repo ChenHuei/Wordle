@@ -2,7 +2,7 @@
   "name": "wordle",
   "version": "0.1.3",
   "private": false,
-  "homepage": "https://chenhuei.github.io/Wordle",
+  "homepage": "https://chenhuei.github.io",
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.3.0",
