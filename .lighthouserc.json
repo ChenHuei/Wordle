@@ -1,10 +1,7 @@
 {
   "ci": {
-    "upload": {
-      "target": "temporary-public-storage"
-    },
     "collect": {
-      "staticDistDir": "./build"
+      "staticDistDir": "./Wordle"
     },
     "asserts": {
       "preset": "lighthouse:no-pwa",
@@ -14,6 +11,9 @@
         "categories:performance": ["warn", { "minScore": 0.2 }],
         "categories:seo": ["warn", { "minScore": 1.0 }]
       }
+    },
+    "upload": {
+      "target": "temporary-public-storage"
     }
   }
 }
