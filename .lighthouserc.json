@@ -1,5 +1,8 @@
 {
   "ci": {
+    "collect": {
+      "staticDistDir": "./Wordle/build"
+    },
     "assert": {
       "preset": "lighthouse:recommended"
     }
