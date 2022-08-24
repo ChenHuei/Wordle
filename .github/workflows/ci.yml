@@ -15,12 +15,11 @@ jobs:
           node-version: 12
       - name: npm install, build
         run: |
-          npm ci
+          npm install
+          npm install -g @lhci/cli@0.8.x
           npm run build
       - name: run lighthouse-ci
-        run: |
-          npm install -g @lhci/cli@0.8.x
-          lhci autorun --upload.target=temporary-public-storage || echo "LHCI failed!"
+        run: lhci autorun || echo "LHCI failed!"
         env:
           LHCI_GITHUB_APP_TOKEN: ${{secrets.LHCI_GITHUB_APP_TOKEN}}
   build:
