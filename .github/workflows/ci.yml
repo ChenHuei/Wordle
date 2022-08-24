@@ -19,7 +19,9 @@ jobs:
           npm install -g @lhci/cli@0.8.x
           npm run build
       - name: run lighthouse-ci
-        run: lhci autorun || echo "LHCI failed!"
+        run: |
+          ls
+          lhci autorun || echo "LHCI failed!"
         env:
           LHCI_GITHUB_APP_TOKEN: ${{secrets.LHCI_GITHUB_APP_TOKEN}}
   build:
