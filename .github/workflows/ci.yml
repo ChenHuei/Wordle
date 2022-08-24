@@ -20,6 +20,7 @@ jobs:
           npm run build
       - name: run lighthouse-ci
         run: |
+          cd build
           ls
           lhci autorun || echo "LHCI failed!"
         env:

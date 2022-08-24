@@ -1,7 +1,7 @@
 {
   "ci": {
     "collect": {
-      "staticDistDir": "./Wordle"
+      "staticDistDir": "./build"
     },
     "asserts": {
       "preset": "lighthouse:no-pwa",
